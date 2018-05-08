@@ -9,6 +9,10 @@ export default class Cars {
             // .then(response => response.data)
             // .catch(error => console.log(error))
     }
+
+    add(car) {
+       return axios.post('/cars', car)
+    }
     
 }
 

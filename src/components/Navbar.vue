@@ -8,7 +8,10 @@
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav">
       <li class="nav-item active">
-        <router-link to="/cars">Cars</router-link>
+        <router-link to="/cars" class="nav-link">Cars</router-link>
+      </li>
+      <li class="nav-item active">
+        <router-link to="/add" class="nav-link">Add car</router-link>
       </li>
       
     </ul>
