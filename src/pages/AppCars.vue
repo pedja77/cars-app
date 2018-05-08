@@ -2,12 +2,13 @@
   <div>
       <div v-for="car in cars" :key="car.id">
           <h5>{{ car.brand }} {{ car.model }}</h5>
-          <ul>
-              <li>Year: {{ car.year }}</li>
-              <li>Automatic: {{ car.isAutomatic ? 'Yes': 'No' }}</li>
-              <li>Number of doors: {{ car.numberOfDoors }}</li>
-              <li>Engine: {{ car.engine }}</li>
-              <li>Maximum speed: {{ car.maxSpeed }}</li>
+          <ul class="list-unstyled">
+              <li class="list-item">Year: {{ car.year }}</li>
+              <li class="list-item">Automatic: {{ car.isAutomatic ? 'Yes': 'No' }}</li>
+              <li class="list-item">Number of doors: {{ car.numberOfDoors }}</li>
+              <li class="list-item">Engine: {{ car.engine }}</li>
+              <li class="list-item">Maximum speed: {{ car.maxSpeed }}</li>
+              <li class="list-item"><router-link class="btn btn-primary" :to="{name: 'edit-car', params: {id: car.id}}">Edit</router-link></li>
           </ul>
       </div>
   </div>

@@ -106,8 +106,21 @@ export default {
                 Engine: ${this.car.engine}
             `
             alert(car)
+        },
+        getCar() {
+            if (this.$route.params.id) {
+                cars.get(this.$route.params.id)
+                 .then(response => {
+                     console.log(response.data)
+                     this.car = response.data
+                 })
+            }
         }
-    }
+    },
+    created() {
+            console.log(this.$route.params)
+            this.getCar()
+        }
 }
 </script>
 

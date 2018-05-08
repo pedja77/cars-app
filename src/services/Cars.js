@@ -13,6 +13,10 @@ export default class Cars {
     add(car) {
        return axios.post('/cars', car)
     }
+
+    get(id) {
+        return axios.get(`/cars/${id}`)
+    }
     
 }
 
