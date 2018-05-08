@@ -56,6 +56,7 @@
   
   <button type="submit" class="btn btn-primary">Submit</button>
   <input class="btn btn-primary" type="reset" value="Reset">
+  <input class="btn btn-primary" value="Preview" @click="preview">
 </form>
 </div>
 </template>
@@ -93,6 +94,18 @@ export default {
                     this.$router.push('/cars')
                 })
                 .catch(error => console.log(error))
+        },
+        preview() {
+            let car = `
+                Brand: ${this.car.brand}
+                Model: ${this.car.model}
+                Year: ${this.car.year}
+                Maximum speed: ${this.car.maxSpeed}
+                Number of doors: ${this.car.numberOfDoors}
+                Automatic gearbox: ${this.car.isAutomatic ? 'Yes': 'No'}
+                Engine: ${this.car.engine}
+            `
+            alert(car)
         }
     }
 }
