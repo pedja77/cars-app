@@ -55,6 +55,7 @@
     </div>
   
   <button type="submit" class="btn btn-primary">Submit</button>
+  <input class="btn btn-primary" type="reset" value="Reset">
 </form>
 </div>
 </template>
