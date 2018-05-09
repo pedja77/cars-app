@@ -8,7 +8,12 @@
               <li class="list-item">Number of doors: {{ car.numberOfDoors }}</li>
               <li class="list-item">Engine: {{ car.engine }}</li>
               <li class="list-item">Maximum speed: {{ car.maxSpeed }}</li>
-              <li class="list-item"><router-link class="btn btn-primary" :to="{name: 'edit-car', params: {id: car.id}}">Edit</router-link></li>
+              <li class="list-item">
+                  <router-link class="btn btn-primary" :to="{name: 'edit-car', params: {id: car.id}}">
+                      Edit
+                  </router-link>
+                  <button  class="btn btn-danger" @click="deleteCar(car.id)">Delete</button>
+              </li>
           </ul>
       </div>
   </div>
@@ -26,6 +31,16 @@ export default {
     created() {
         cars.getAll()
             .then(response => this.cars = response.data)
+    },
+    methods: {
+        deleteCar(id) {
+            console.log('Deleting ...', id)
+            cars.delete(id)
+                .then(() => {
+                    cars.getAll()
+                        .then(response => this.cars = response.data)
+                })
+        }
     }
 }
 </script>

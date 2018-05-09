@@ -21,6 +21,10 @@ export default class Cars {
     edit(id, car) {
         return axios.put(`api/cars/${id}`, car)
     }
+
+    delete(id) {
+        return axios.delete(`/api/cars/${id}`)
+    }
     
 }
 

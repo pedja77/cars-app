@@ -125,11 +125,6 @@ export default {
                      this.car = response.data
                  })
             }
-        },
-        edit() {
-          cars.edit(this.$route.params.id, this.car)
-            .then(response => console.log(response.status))
-            .cath(err => console.log(err))
         }
     },
     created() {
