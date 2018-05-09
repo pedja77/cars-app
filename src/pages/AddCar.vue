@@ -24,7 +24,7 @@
     <input type="number" class="form-control" id="number-of-doors" min="0" v-model="car.numberOfDoors" required>
   </div>
   <div class="form-group form-check">
-    <input type="checkbox" class="form-check-input" id="is-automatic" v-model="car.isAutomatic" required>
+    <input type="checkbox" class="form-check-input" id="is-automatic" v-model="car.isAutomatic">
     <label class="form-check-label" for="is-automatic">Is gearbox automatic</label>
   </div>
   <div class="form-group">
@@ -88,12 +88,22 @@ export default {
             this.car.year = parseInt(this.car.year)
             this.car.maxSpeed = parseInt(this.car.maxSpeed)
             this.car.numberOfDoors = parseInt(this.car.numberOfDoors)
-            cars.add(this.car)
+            if (!this.car.id) {
+              cars.add(this.car)
                 .then(() => {
                     //console.log(response)
                     this.$router.push('/cars')
                 })
                 .catch(error => console.log(error))
+            } else {
+              console.log('Edit: ', this.car)
+              cars.edit(this.$route.params.id, this.car)
+               .then(() => {
+                 this.$router.push('/cars')
+               })
+               .catch(err => console.log(err))
+            }
+            
         },
         preview() {
             let car = `
@@ -115,6 +125,11 @@ export default {
                      this.car = response.data
                  })
             }
+        },
+        edit() {
+          cars.edit(this.$route.params.id, this.car)
+            .then(response => console.log(response.status))
+            .cath(err => console.log(err))
         }
     },
     created() {
