@@ -34,12 +34,16 @@ export default {
     },
     methods: {
         deleteCar(id) {
-            console.log('Deleting ...', id)
-            cars.delete(id)
+            //console.log('Deleting ...', id)
+            let confirmDelete = confirm('Delete this car from database?')
+            if (confirmDelete) {
+                cars.delete(id)
                 .then(() => {
                     cars.getAll()
                         .then(response => this.cars = response.data)
                 })
+            }
+            
         }
     }
 }

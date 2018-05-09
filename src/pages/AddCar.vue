@@ -116,6 +116,7 @@ export default {
                 Engine: ${this.car.engine}
             `
             alert(car)
+            
         },
         getCar() {
             if (this.$route.params.id) {
