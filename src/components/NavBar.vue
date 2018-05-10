@@ -7,11 +7,11 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav">
-      <li class="nav-item active">
-        <router-link to="/cars" class="nav-link">Cars</router-link>
+      <li class="nav-item ">
+        <router-link :to="{name: 'cars'}" class="nav-link">Cars</router-link>
       </li>
-      <li class="nav-item active">
-        <router-link to="/add" class="nav-link">Add car</router-link>
+      <li class="nav-item ">
+        <router-link :to="{name: 'add-car'}" class="nav-link">Add car</router-link>
       </li>
       
     </ul>
@@ -22,9 +22,8 @@
 
 <script>
 export default {
-  name: 'Navbar',
-  
-}
+  name: "NavBar"
+};
 </script>
 
 

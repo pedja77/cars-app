@@ -12,7 +12,7 @@
   <div class="form-group">
     <label for="year">Year</label>
     <select type="text" class="form-control" id="year" v-model="car.year" required>
-        <option v-for="year in years" :key="year" :value="year">{{ year }}</option>
+        <option v-for="year in yearsList" :key="year" :value="year">{{ year }}</option>
     </select>
   </div>
   <div class="form-group">
@@ -62,77 +62,77 @@
 </template>
 
 <script>
-import { cars } from '../services/Cars'
+import { cars } from "../services/Cars";
 
 export default {
-    data() {
-        return {
-            years: [
-                1990, 1991, 1992, 1993, 1994, 1995,1996, 1997, 1998, 1999, 2000,
-                2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 
-                2012, 2013, 2014, 2015, 2016, 2017, 2018
-                ],
-            car: {
-                brand: '',
-                model: '',
-                year: '',
-                maxSpeed: '',
-                numberOfDoors: '',
-                isAutomatic: false,
-                engine: ''
-            }
-        }
+  data() {
+    return {
+      car: {
+        brand: "",
+        model: "",
+        year: "",
+        maxSpeed: "",
+        numberOfDoors: "",
+        isAutomatic: false,
+        engine: ""
+      }
+    };
+  },
+  created() {
+    console.log(this.$route.params);
+    this.getCar();
+  },
+  methods: {
+    submit() {
+      this.car.year = parseInt(this.car.year);
+      this.car.maxSpeed = parseInt(this.car.maxSpeed);
+      this.car.numberOfDoors = parseInt(this.car.numberOfDoors);
+      if (!this.car.id) {
+        cars
+          .add(this.car)
+          .then(() => {
+            this.$router.push("/cars");
+          })
+          .catch(error => console.log(error));
+      } else {
+        console.log("Edit: ", this.car);
+        cars
+          .edit(this.$route.params.id, this.car)
+          .then(() => {
+            this.$router.push("/cars");
+          })
+          .catch(err => console.log(err));
+      }
     },
-    methods: {
-        submit() {
-            this.car.year = parseInt(this.car.year)
-            this.car.maxSpeed = parseInt(this.car.maxSpeed)
-            this.car.numberOfDoors = parseInt(this.car.numberOfDoors)
-            if (!this.car.id) {
-              cars.add(this.car)
-                .then(() => {
-                    //console.log(response)
-                    this.$router.push('/cars')
-                })
-                .catch(error => console.log(error))
-            } else {
-              console.log('Edit: ', this.car)
-              cars.edit(this.$route.params.id, this.car)
-               .then(() => {
-                 this.$router.push('/cars')
-               })
-               .catch(err => console.log(err))
-            }
-            
-        },
-        preview() {
-            let car = `
+    preview() {
+      let car = `
                 Brand: ${this.car.brand}
                 Model: ${this.car.model}
                 Year: ${this.car.year}
                 Maximum speed: ${this.car.maxSpeed}
                 Number of doors: ${this.car.numberOfDoors}
-                Automatic gearbox: ${this.car.isAutomatic ? 'Yes': 'No'}
+                Automatic gearbox: ${this.car.isAutomatic ? "Yes" : "No"}
                 Engine: ${this.car.engine}
-            `
-            alert(car)
-            
-        },
-        getCar() {
-            if (this.$route.params.id) {
-                cars.get(this.$route.params.id)
-                 .then(response => {
-                     console.log(response.data)
-                     this.car = response.data
-                 })
-            }
-        }
+            `;
+      alert(car);
     },
-    created() {
-            console.log(this.$route.params)
-            this.getCar()
-        }
-}
+    getCar() {
+      if (this.$route.params.id) {
+        cars.get(this.$route.params.id).then(response => {
+          console.log(response.data);
+          this.car = response.data;
+        });
+      }
+    }
+  },
+  computed: {
+    yearsList() {
+      return Array(29)
+        .fill(1990)
+        .map((el, i) => el + i);
+    }
+  }
+};
 </script>
 
 

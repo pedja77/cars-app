@@ -6,12 +6,10 @@ export default class Cars {
 
     getAll() {
         return axios.get('/api/cars')
-            // .then(response => response.data)
-            // .catch(error => console.log(error))
     }
 
     add(car) {
-       return axios.post('/api/cars', car)
+        return axios.post('/api/cars', car)
     }
 
     get(id) {
@@ -25,7 +23,7 @@ export default class Cars {
     delete(id) {
         return axios.delete(`/api/cars/${id}`)
     }
-    
+
 }
 
 export const cars = new Cars()
